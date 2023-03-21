@@ -10,7 +10,7 @@ const productListAtom = atom({
 
 const filterAtom = atom({
   key: 'filterAtom',
-  default: [{ brands: ['대구 반할만떡', '풀무원'], prices: [1000, 5000] }]
+  default: [{ brandList: ['대구 반할만떡', '풀무원'], priceList: [1000, 5000] }]
 })
 
 const productListSelectorFamily = selectorFamily({
@@ -18,13 +18,14 @@ const productListSelectorFamily = selectorFamily({
   get: (필터모음 = [{ brand: ['대구 반할만떡', '풀무원'] }]) => ({ get }) => {
     const productList = get(productListAtom)
     const 브랜드필터 = (상품) => {
-      const 브랜드조건배열 = 필터모음?.find(필터 => 필터.brands)?.brands || []
+      const 브랜드조건배열 = 필터모음?.find(필터 => 필터.brandList)?.brandList || []
+      
       return 브랜드조건배열.some(브랜드 => {
         return 브랜드 === 상품.brand
       })
     }
     const 가격필터 = (상품) => {
-      const [최솟값, 최댓값] = 필터모음?.find(필터 => 필터.prices)?.prices || []
+      const [최솟값, 최댓값] = 필터모음?.find(필터 => 필터.priceList)?.priceList || []
       
       return 상품.price >= 최솟값 && 상품.price <= 최댓값
     }
