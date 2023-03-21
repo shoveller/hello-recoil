@@ -15,7 +15,7 @@ const filterAtom = atom({
 
 const productListSelectorFamily = selectorFamily({
   key: 'productListSelectorFamily', 
-  get: (필터모음 = [{ brand: ['대구 반할만떡', '풀무원'] }]) => ({ get }) => {
+  get: (필터모음 = [{ brandList: ['대구 반할만떡', '풀무원'], priceList: [1000, 5000] }]) => ({ get }) => {
     const productList = get(productListAtom)
     const 브랜드필터 = (상품) => {
       const 브랜드조건배열 = 필터모음?.find(필터 => 필터.brandList)?.brandList || []
